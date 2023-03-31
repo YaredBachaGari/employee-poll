@@ -1,0 +1,33 @@
+.card-container{
+    border: 0.5px solid #737272;
+    margin: 1rem;
+    text-align: center;
+}
+.card-text{
+    border-bottom: 0.5px solid #737272;
+}
+.card-text p{
+    padding: 0rem 5rem;
+}
+.card-container button{
+    margin: 1rem 0;
+    width: 90%;
+    border: 0.5px solid #09c326;
+    background: none;
+    padding: 0.5rem;
+    color: #09c326;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.card-container button:hover{
+    cursor: pointer;
+    background-color: brown;
+    color: aliceblue;
+}
+.username{
+    font-weight: bold;
+}
+.polldate{
+    color: #8c8c8c;
+    font-size: 0.75rem;
+}

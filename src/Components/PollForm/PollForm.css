@@ -1,0 +1,42 @@
+.pollform-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+.pollform-input-container{
+  width: 100%;
+  margin: 0.25rem auto;
+}
+.pollform-input-container input {
+  display: block;
+  width: 90%;
+  height: 2rem;
+  margin: 0rem auto;
+  border-radius: 0.5rem;
+  border: 0.5px solid #737272;
+  font-size: 1rem;
+}
+.pollform-btn button{
+    font-size: 1rem;
+    font-weight: bold;
+    padding:0.5rem 2rem;
+    margin-top: 1.5rem;
+    background-color:#eeeeee;
+    border: 1px solid #737272;
+    border-radius: 0.5rem;
+}
+
+.pollform-btn button:hover{
+    background-color:brown; 
+    color: #eeeeee;
+}
+.formheading{
+font-size: 1.5rem;
+font-weight: bold;
+}
+.suggestion{
+  font-size: 0.9rem;
+  color: #737272;
+}

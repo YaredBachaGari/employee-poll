@@ -1,5 +1,9 @@
 .landing-img{
     margin: 0rem auto;
-    padding: 2rem 0;
+    padding: 1rem 0;
     background-color: brown;
+    text-align: center;
+}
+.landing-img h1{
+    color: aliceblue;
 }

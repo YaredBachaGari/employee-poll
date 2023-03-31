@@ -1,13 +1,17 @@
-import React from 'react'
-import Navbar from '../../Components/NavBar/Navbar'
+import React from "react";
+import Navbar from "../../Components/NavBar/Navbar";
+import "./Leaderboard.css";
+import SummaryTable from "../../Components/SummaryTable/SummaryTable";
 
 const Leaderboard = () => {
   return (
-    <div>
-    <Navbar/>
-    <hr/>
+    <div className="">
+      <Navbar />
+      <div className="leadboardSummary">
+        <SummaryTable />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Leaderboard
+export default Leaderboard;

@@ -1,0 +1,19 @@
+.poll-container{
+    border: 0.5px solid #737272;
+}
+.header-container{
+    border-bottom: 0.5px solid #737272;;
+}
+.header-container h3{
+  text-align: center;
+}
+.listof-pollcards{
+    list-style: none;
+    padding-left: 0;
+    width: 100%;
+}
+.individual-card{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}

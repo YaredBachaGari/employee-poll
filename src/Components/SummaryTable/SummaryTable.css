@@ -1,0 +1,39 @@
+.tablecontainer {
+  width: 100%;
+}
+
+.profileAvatar {
+  justify-content: flex-start;
+}
+.table-heading {
+  background-color: #eeeeee;
+}
+tr {
+  height: 4rem;
+  text-align: left;
+
+}
+td, th{
+    padding-left: 1rem;
+}
+table,
+th,
+td {
+  border-collapse: collapse;
+  border-bottom: 0.5px solid #737272;
+}
+.tableAvatar-username {
+  display: flex;
+  flex-direction: row;
+  place-items: center;
+}
+.tableAvatar-username .user-descr {
+  margin-left: 1.5rem;
+}
+.userInfo-user {
+  color: #737272;
+  font-size: 0.9rem;
+}
+.userInfo{
+    font-weight: bold;
+}

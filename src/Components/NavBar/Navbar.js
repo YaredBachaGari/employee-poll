@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <div className="nav-container">
       <div className="nav-menu">
-        <Link to="/" className="link">
+        <Link to="/home" className="link">
           Home
         </Link>
         <Link to="/leaderboard" className="link">
@@ -18,8 +18,14 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="avatar-logout">
-        <Avatar />
-        <button>Logout</button>
+        <div className="avatar-username profileAvatar">
+          <Avatar />
+          <span>Jone Doe</span>
+        </div>
+        <Link to="/" className="logout">
+        Logout
+        </Link>
+        {/* <button>Logout</button> */}
       </div>
     </div>
   );

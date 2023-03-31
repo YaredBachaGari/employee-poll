@@ -1,29 +1,47 @@
-.nav-container{
-    display: grid;
-    grid-template-columns: 70% 30%;
-    align-items: center;
-    padding: 1rem;
+.nav-container {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 0.5px solid #737272;
 }
-.nav-menu{
-    display: flex;
+.nav-menu {
+  display: flex;
 }
-.nav-menu .link{
-    margin: 0 1.5rem;
-    color: #737272;
+.nav-menu .link {
+  margin: 0 1.5rem;
+  color: #737272;
 }
-.avatar-logout button {
-  border: none;
+.nav-menu .link:hover {
+    color: brown;
+    text-decoration: underline 3px solid;
+  }
+.avatar-logout .logout {
   background: none;
   font-size: 1.2rem;
   font-weight: bold;
   color: #737272;
 }
+.avatar-logout .logout:hover {
+  cursor: pointer;
+  color: brown;
+}
 .nav-menu {
   font-size: 1.2rem;
   font-weight: bold;
 }
-.avatar-logout{
+.avatar-logout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.avatar-username{
     display: flex;
     flex-direction: row;
-    justify-content:space-around;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+.profileAvatar{
+    display: flex;
+    justify-content: center
 }
