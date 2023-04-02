@@ -16,7 +16,7 @@ function App() {
         <Route path="/questions/:questionId" element={<PollViewerPage />} />
         <Route path="/result/:questionId" element={<VoteResultPage />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
-        <Route path="/new" element={<NewPollPage />} />
+        <Route path="/add" element={<NewPollPage />} />
       </Routes>
     </BrowserRouter>
   );

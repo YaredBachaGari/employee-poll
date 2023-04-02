@@ -1,8 +1,8 @@
 import React from "react";
 import PollCard from "../PollCoard/PollCard";
-import "./PollContainer.css"
+import "./PollContainer.css";
 
-const PollCointainer = ({category}) => {
+const PollCointainer = ({ category, allUsers, AuthUser, data }) => {
   return (
     <div className="poll-container">
       <header className="header-container">
@@ -10,11 +10,11 @@ const PollCointainer = ({category}) => {
       </header>
       <ul className="listof-pollcards">
         <li className="individual-card">
-          <PollCard />
-          <PollCard />
-          <PollCard />
-          <PollCard />
-          <PollCard />
+          {data.map((survey) => {
+            return (
+              <PollCard key={survey.id} AuthUser={AuthUser} survey={survey} category={category} />
+            );
+          })}
         </li>
       </ul>
     </div>

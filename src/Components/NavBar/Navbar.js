@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Avatar from "../Avatar/Avatar";
 import "./Navbar.css";
+import { connect } from "react-redux";
 
-const Navbar = () => {
+const Navbar = ({ AuthUser }) => {
+  const { username, avatarURL } = AuthUser.loggedInUser;
   return (
     <div className="nav-container">
       <div className="nav-menu">
@@ -13,22 +15,27 @@ const Navbar = () => {
         <Link to="/leaderboard" className="link">
           LeaderBoard
         </Link>
-        <Link to="/new" className="link">
+        <Link to="/add" className="link">
           New
         </Link>
       </div>
       <div className="avatar-logout">
         <div className="avatar-username profileAvatar">
-          <Avatar />
-          <span>Jone Doe</span>
+          <Avatar AvatarUrl={avatarURL} />
+          <span>{username}</span>
         </div>
         <Link to="/" className="logout">
-        Logout
+          Logout
         </Link>
         {/* <button>Logout</button> */}
       </div>
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    AuthUser: state.AuthUser,
+  };
+};
 
-export default Navbar;
+export default connect(mapStateToProps)(Navbar);

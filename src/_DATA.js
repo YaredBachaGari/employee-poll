@@ -3,7 +3,7 @@ let users = {
     id: 'sarahedo',
     password:'password123',
     name: 'Sarah Edo',
-    avatarURL: null,
+    avatarURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-p7YzyqrJX_Z5mKjsKP6hO1T0K7Vcg_mAMwgaHbJNl55p8mcrgOcG_Ojy6yrHWPLKmJc&usqp=CAU",
     answers: {
       "8xf0y6ziyjabvozdd253nd": 'optionOne',
       "6ni6ok3ym7mf1p33lnez": 'optionOne',
@@ -16,7 +16,7 @@ let users = {
     id: 'tylermcginnis',
     password:'abc321',
     name: 'Tyler McGinnis',
-    avatarURL: null,
+    avatarURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCxVef4dTd1U-iuj9AWMwleA7Ifn8Q-GJOVu93OWv2F5g8nCQ6AsliQdgTJJRjSnjkv6g&usqp=CAU",
     answers: {
       "vthrdm985a262al8qx3do": 'optionOne',
       "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -27,7 +27,7 @@ let users = {
     id: 'mtsamis',
     password:'xyz123',
     name: 'Mike Tsamis',
-    avatarURL: null,
+    avatarURL: "https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584__340.png",
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',
@@ -39,7 +39,7 @@ let users = {
     id: 'zoshikanlu',
     password:'pass246',
     name: 'Zenobia Oshikanlu',
-    avatarURL: null,
+    avatarURL: "https://w7.pngwing.com/pngs/613/636/png-transparent-computer-icons-user-profile-male-avatar-avatar-heroes-logo-black-thumbnail.png",
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
     },
@@ -178,7 +178,7 @@ export function _saveQuestion (question) {
   })
 }
 
-export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
+export function _saveQuestionAnswer ({ authedUser, qid, answer }) { //username, questionId, optionOne/optionTwo
   return new Promise((resolve, reject) => {
     if (!authedUser || !qid || !answer) {
       reject("Please provide authedUser, qid, and answer");
