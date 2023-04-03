@@ -14,7 +14,7 @@ const HOC = (Component) => {
     useEffect(() => {
       fetchUsers();
       getQuestions();
-    }, []);
+    }, [fetchUsers, getQuestions]);
 
     return (
       <Component
