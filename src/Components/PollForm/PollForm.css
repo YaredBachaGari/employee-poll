@@ -40,3 +40,9 @@ font-weight: bold;
   font-size: 0.9rem;
   color: #737272;
 }
+
+.successMsg{
+  color: green;
+  font-weight: bold;
+  font-size: 1.25rem;
+}

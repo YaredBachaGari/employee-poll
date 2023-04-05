@@ -3,9 +3,19 @@ import { Link } from "react-router-dom";
 import Avatar from "../Avatar/Avatar";
 import "./Navbar.css";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../Redux-handler/Actions/AuthUser";
 
 const Navbar = ({ AuthUser }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { username, avatarURL } = AuthUser.loggedInUser;
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate("/");
+  };
   return (
     <div className="nav-container">
       <div className="nav-menu">
@@ -24,10 +34,13 @@ const Navbar = ({ AuthUser }) => {
           <Avatar AvatarUrl={avatarURL} />
           <span>{username}</span>
         </div>
-        <Link to="/" className="logout">
+        <button
+          onClick={() => {
+            handleLogout();
+          }}
+        >
           Logout
-        </Link>
-        {/* <button>Logout</button> */}
+        </button>
       </div>
     </div>
   );

@@ -16,13 +16,14 @@
     color: brown;
     text-decoration: underline 3px solid;
   }
-.avatar-logout .logout {
+.avatar-logout button {
+  border: none;
   background: none;
   font-size: 1.2rem;
   font-weight: bold;
   color: #737272;
 }
-.avatar-logout .logout:hover {
+.avatar-logout button:hover {
   cursor: pointer;
   color: brown;
 }

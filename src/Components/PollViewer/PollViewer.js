@@ -1,33 +1,28 @@
 import React, { useRef } from "react";
 import Avatar from "../Avatar/Avatar";
 import "./PollViewer.css";
-import { useParams } from "react-router-dom";
-import { connect } from "react-redux";
-import {handlePostingAnswer} from  "../../Redux-handler/Actions/Answer"
+import { handlePostingAnswer } from "../../Redux-handler/Actions/Answer";
+import { useDispatch } from "react-redux";
 
-const PollViewer = ({ Questions, allUsers,postAnswer, AuthUser }) => {
-  const params = useParams();
-  const qid=params?.questionId
-  const { author, optionOne, optionTwo } = Questions?.data[qid];
-  const avatar = allUsers?.data[author]?.avatarURL;
+const PollViewer = ({ author, optionOne, optionTwo,avatar,authedUser, qid }) => {
+  const dispatch = useDispatch();
   const optionA = useRef();
   const optionB = useRef();
   const ButtonA = useRef(0);
   const ButtonB = useRef(0);
   const onSelectHandler = (buttonId) => {
     if (buttonId === "button1") {
-      const answer ="optionOne"
-      const authedUser = AuthUser.loggedInUser.username
-      postAnswer({authedUser, qid, answer})
+      const answer = "optionOne";
+      dispatch(handlePostingAnswer({ authedUser, qid, answer }));
       optionA.current.style.border = "1px solid green";
       ButtonA.current.style.backgroundColor = "green";
       ButtonB.current.setAttribute("disabled", true);
       ButtonB.current.style.backgroundColor = "#cccccc";
       ButtonB.current.style.color = "#666666";
-      
     }
     if (buttonId === "button2") {
-      console.log("option 2 clicked");
+      const answer = "optionTwo";
+      dispatch(handlePostingAnswer({ authedUser, qid, answer }));
       optionB.current.style.border = "1px solid green";
       ButtonB.current.style.backgroundColor = "green";
       ButtonA.current.setAttribute("disabled", true);
@@ -35,7 +30,6 @@ const PollViewer = ({ Questions, allUsers,postAnswer, AuthUser }) => {
       ButtonA.current.style.color = "#666666";
     }
   };
-
 
   return (
     <div>
@@ -57,10 +51,7 @@ const PollViewer = ({ Questions, allUsers,postAnswer, AuthUser }) => {
             Click
           </button>
         </div>
-        <div 
-        ref={optionB} 
-        className="option"
-        >
+        <div ref={optionB} className="option">
           <p>{optionTwo?.text}</p>
           <button
             ref={ButtonB}
@@ -74,17 +65,5 @@ const PollViewer = ({ Questions, allUsers,postAnswer, AuthUser }) => {
     </div>
   );
 };
-const mapStateToProps = (state, ownProps) => {
-  return {
-    Answers: state.Answers,
-  };
-};
 
-const mapDispatchToProps =(dispatch)=>{
-  return {
-    postAnswer: (data)=>dispatch(handlePostingAnswer(data))
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(PollViewer);
+export default PollViewer;

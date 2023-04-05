@@ -10,10 +10,18 @@ const PollCard = ({ survey, category }) => {
   const navigate = useNavigate();
   const handleClick = () => {
     if (category === "New Questions") {
-      navigate(`/questions/${id}`);
+      if (id) {
+        navigate(`/questions/${id}`);
+      } else {
+        navigate("/questions/notfound");
+      }
     }
-    if(category==="Done"){
-      navigate('/result/questionId')
+    if (category === "Done") {
+      if (id) {
+        navigate(`/result/${id}`);
+      } else {
+        navigate("/questions/notfound");
+      }
     }
   };
 

@@ -1,4 +1,3 @@
-import { get_all_users } from "../Actions/Users";
 import {
   Fetch_user_request,
   Fetch_user_success,
@@ -32,8 +31,8 @@ const UsersReducer = (state = initialState, action) => {
         error: action.payload,
       };
     default:
-      return state
+      return state;
   }
 };
 
-export default UsersReducer
+export default UsersReducer;

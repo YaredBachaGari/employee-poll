@@ -18,7 +18,7 @@ export const  formatDate = (timestamp)=> {
 
   export const  filterData =( Questions,AuthUser)=>{
     const { data } = Questions;
-    const allQuestions = Object.values(data);
+    const allQuestions = Object.values(data).sort((a,b)=>b.timestamp-a.timestamp);
     const newQuestions = allQuestions.filter(
       (q) =>
         !q?.optionOne?.votes.includes(AuthUser?.loggedInUser?.username) &&

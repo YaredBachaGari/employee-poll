@@ -10,25 +10,31 @@ const Home = ({ allUsers, AuthUser, Questions }) => {
   const newQuestions = filteredQ.new;
   const completed = filteredQ.complete;
   return (
-    <div>
-      <Navbar AuthUser={AuthUser} />
-      <div className="poll-category">
-        <PollCointainer
-          category={"New Questions"}
-          allUsers={allUsers}
-          AuthUser={AuthUser}
-          data={newQuestions}
-        />
-      </div>
-      <div className="poll-category">
-        <PollCointainer
-          category={"Done"}
-          allUsers={allUsers}
-          AuthUser={AuthUser}
-          data={completed}
-        />
-      </div>
-    </div>
+    <>
+      {Questions.loading || allUsers.loading ? (
+        <p className="loadingmsg">Loading...</p>
+      ) : (
+        <div>
+          <Navbar AuthUser={AuthUser} />
+          <div className="poll-category">
+            <PollCointainer
+              category={"New Questions"}
+              allUsers={allUsers}
+              AuthUser={AuthUser}
+              data={newQuestions}
+            />
+          </div>
+          <div className="poll-category">
+            <PollCointainer
+              category={"Done"}
+              allUsers={allUsers}
+              AuthUser={AuthUser}
+              data={completed}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

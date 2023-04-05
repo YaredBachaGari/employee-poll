@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./login.css";
-import { connect } from "react-redux";
-import { handleUserFetch } from "../../Redux-handler/Actions/Users";
 import { useNavigate } from "react-router-dom";
 import { AuthenticateUserSuccess } from "../../Redux-handler/Actions/AuthUser";
+import { useDispatch } from "react-redux";
 
-const Login = ({ AuthenticateUser, fetchUsers, UserData, Auth }) => {
+const Login = ({ UserData, Auth }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const { data } = UserData;
@@ -21,9 +21,7 @@ const Login = ({ AuthenticateUser, fetchUsers, UserData, Auth }) => {
       };
     });
   };
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+
   const submitHandler = (e) => {
     e.preventDefault();
     let foundUser = false;
@@ -49,22 +47,20 @@ const Login = ({ AuthenticateUser, fetchUsers, UserData, Auth }) => {
       setError("No Password or userName entered");
     }
     if (foundUser && user) {
-      AuthenticateUser(user);
+      dispatch(AuthenticateUserSuccess(user));
     }
   };
-
-  console.log(Auth);
 
   return (
     <div className="login-container">
       {error && <p style={{ color: "red" }}>{error}!!!</p>}
       <div className="input-container">
-        <label htmlFor="username">User</label>
+        <label htmlFor="username">User Name</label>
         <input
           id="username"
           value={userInfo.username}
           name="username"
-          placeholder="user"
+          placeholder="username"
           onChange={onchangeHandler}
         />
       </div>
@@ -72,6 +68,7 @@ const Login = ({ AuthenticateUser, fetchUsers, UserData, Auth }) => {
         <label htmlFor="password">Password</label>
         <input
           id="password"
+          type="password"
           value={userInfo.password}
           name="password"
           placeholder="Password"
@@ -86,14 +83,5 @@ const Login = ({ AuthenticateUser, fetchUsers, UserData, Auth }) => {
     </div>
   );
 };
-const mapStateToProps = (state) => {
-  return { UserData: state.Users, Auth: state.AuthUser };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchUsers: () => dispatch(handleUserFetch()),
-    AuthenticateUser: (user) => dispatch(AuthenticateUserSuccess(user)),
-  };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

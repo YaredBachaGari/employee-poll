@@ -1,11 +1,19 @@
-import React from "react";
-
-const VoteResult = () => {
+import "./VoteResult.css"
+const VoteResult = ({ result }) => {
   return (
-    <div>
-      <p>Text of option selected by logged in user</p>
-      <p>No of people voted this option: <span>400</span> </p>
-      <p>% of people choose this option: <span>55%</span></p>
+    <div className="summaryContainer">
+      <p>{result.text}</p>
+      <p>
+        No of people voted this option: <span>{result.votersNo}</span>{" "}
+      </p>
+      <p>
+        % of people who voted this option out of total voters so far:{" "}
+        <span>{`${result.percentageSofar} %`}</span>
+      </p>
+      <p>
+        % of people who voted this option out of all users:{" "}
+        <span>{`${result.percentageTotal} %`}</span>
+      </p>
     </div>
   );
 };

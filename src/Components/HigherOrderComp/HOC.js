@@ -1,20 +1,19 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { handleUserFetch } from "../../Redux-handler/Actions/Users";
 import { handlequestionFetching } from "../../Redux-handler/Actions/Questions";
 
 const HOC = (Component) => {
-  const NewComponent = ({
-    allUsers,
-    AuthUser,
-    fetchUsers,
-    getQuestions,
-    Questions,
-  }) => {
+  const NewComponent = () => {
+    const allUsers = useSelector((state) => state.Users);
+    const AuthUser = useSelector((state) => state.AuthUser);
+    const Questions = useSelector((state) => state.Questions);
+    const dispatch = useDispatch();
+
     useEffect(() => {
-      fetchUsers();
-      getQuestions();
-    }, [fetchUsers, getQuestions]);
+      dispatch(handleUserFetch());
+      dispatch(handlequestionFetching());
+    }, [dispatch]);
 
     return (
       <Component
@@ -25,22 +24,7 @@ const HOC = (Component) => {
     );
   };
 
-  const mapStateToProps = (state) => {
-    return {
-      allUsers: state.Users,
-      AuthUser: state.AuthUser,
-      Questions: state.Questions,
-    };
-  };
-
-  const mapDispatchToProps = (dispatch) => {
-    return {
-      fetchUsers: () => dispatch(handleUserFetch()),
-      getQuestions: () => dispatch(handlequestionFetching()),
-    };
-  };
-
-  return connect(mapStateToProps, mapDispatchToProps)(NewComponent);
+  return NewComponent;
 };
 
 export default HOC;

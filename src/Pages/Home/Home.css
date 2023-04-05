@@ -2,3 +2,9 @@
     width: 75%;
     margin: 5rem auto;
   }
+  .loadingmsg{
+    margin: 5rem auto;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+  }

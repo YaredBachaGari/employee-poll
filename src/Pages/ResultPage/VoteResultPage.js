@@ -1,14 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../Components/NavBar/Navbar";
 import VoteResult from "../../Components/VoteResult/VoteResult";
 import "./VoteResultPage.css";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import NotFound from "../../Components/NotFound/NotFound";
 
 const VoteResultPage = () => {
+  const { questions, authUser, users } = useSelector((state) => ({
+    questions: state.Questions,
+    authUser: state.AuthUser,
+    users: state.Users,
+  }));
+  const [result, setResult] = useState({
+    text: "",
+    votersNo: "",
+    percentage: "",
+  });
+  const qid = useParams()?.questionId;
+  const optionOne = questions?.data[qid]?.optionOne;
+  const optionTwo = questions.data[qid]?.optionTwo;
+  const authuser = authUser.loggedInUser.username;
+  const NoOfallUsers = Object.keys(users.data).length;
+
+  const loadVoteSummary = () => {
+    const optionOnevoters = optionOne?.votes.length;
+    const optionTwovoters = optionTwo?.votes.length;
+    let displayText = "";
+    let percentageVote = "";
+    let percentageTotal = "";
+    if (optionOnevoters || optionTwovoters) {
+      if (optionOne.votes.includes(authuser)) {
+        displayText = optionOne.text;
+        percentageVote =
+          (optionOnevoters / (optionOnevoters + optionTwovoters)) * 100;
+        percentageTotal = (optionOnevoters / NoOfallUsers) * 100;
+      } else {
+        displayText = optionTwo.text;
+        percentageVote =
+          (optionTwovoters / (optionOnevoters + optionTwovoters)) * 100;
+        percentageTotal = (optionTwovoters / NoOfallUsers) * 100;
+      }
+    }
+
+    setResult({
+      text: displayText,
+      votersNo: optionOnevoters + optionTwovoters,
+      percentageSofar: percentageVote,
+      percentageTotal: percentageTotal,
+    });
+  };
+  useEffect(() => {
+    loadVoteSummary();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div>
       <Navbar />
       <div className="voteresult-summary">
-        <VoteResult />
+        {result.text && result.percentageTotal ? (
+          <VoteResult result={result} />
+        ) : (
+          <NotFound />
+        )}
       </div>
     </div>
   );

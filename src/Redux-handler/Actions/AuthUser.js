@@ -1,6 +1,7 @@
 export const user_authentication_request = "user_authentication_request"
 export const user_authentication_success = "user_authentication_success"
 export const user_authentication_failed = "user_authentication_failed"
+export const logout_user = "logout_user"
 
 
 export const AuthenticateUserRequest = ()=>{
@@ -19,3 +20,6 @@ export const AuthenticateUserFailed = ()=>{
         type: user_authentication_failed,
     }
 }
+export const logoutUser = () => ({
+    type: logout_user
+  });

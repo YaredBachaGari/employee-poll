@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Login from "../../Components/Login/login";
 import "./LandingPage.css";
+import HOC from "../../Components/HigherOrderComp/HOC";
 
-const LandingPage = () => {
-
+const LandingPage = ({ allUsers, AuthUser }) => {
   return (
     <div>
       <div className="landing-img">
@@ -16,10 +16,10 @@ const LandingPage = () => {
         />
       </div>
       <div className="login-form">
-        <Login />
+        <Login UserData={allUsers} Auth={AuthUser} />
       </div>
     </div>
   );
 };
 
-export default LandingPage;
+export default HOC(LandingPage);
