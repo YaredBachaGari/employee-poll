@@ -44,32 +44,32 @@ describe("PollForm Component", () => {
     expect(screen.getByTestId("optionOne")).toBeInTheDocument();
     expect(screen.getByTestId("optionTwo")).toBeInTheDocument();
   });
-//   it("on submit of the poll success msg should display", async () => {
-//     const mockStore = configureStore();
-//     const store = mockStore({
-//       AuthUser: {
-//         loggedInUser: { id: 1, username: "john" },
-//       },
-//     });
-//     const { Form } = render(
-//       <Provider store={store}>
-//         <BrowserRouter>
-//           <PollForm />
-//         </BrowserRouter>
-//       </Provider>
-//     );
-//     fireEvent.input(screen.getByTestId("optionOne"), {
-//       target: { value: "learn java" },
-//     });
-//     fireEvent.input(screen.getByTestId("optionOne"), {
-//       target: { value: "learn c#" },
-//     });
-//     fireEvent.click(screen.getByTestId("createPoll"));
-//     await waitFor(() => new Promise((resolve) => setTimeout(resolve, 4000)), {
-//       timeout: 5000,
-//     });
-//     await expect(
-//       screen.queryByText(/you have successfully created a poll!!/i)
-//     ).not.toBeInTheDocument();
-//   });
+  it("on submit of the poll success msg should display", async () => {
+    const mockStore = configureStore();
+    const store = mockStore({
+      AuthUser: {
+        loggedInUser: { id: 1, username: "john" },
+      },
+    });
+    const { Form } = render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <PollForm />
+        </BrowserRouter>
+      </Provider>
+    );
+    fireEvent.input(screen.getByTestId("optionOne"), {
+      target: { value: "learn java" },
+    });
+    fireEvent.input(screen.getByTestId("optionOne"), {
+      target: { value: "learn c#" },
+    });
+    fireEvent.click(screen.getByTestId("createPoll"));
+    await waitFor(() => new Promise((resolve) => setTimeout(resolve, 4000)), {
+      timeout: 5000,
+    });
+    await expect(
+      screen.queryByText(/you have successfully created a poll!!/i)
+    ).not.toBeInTheDocument();
+  });
 });

@@ -1,5 +1,19 @@
-.summaryContainer{
-    border: 1px solid #737272;
-    width: 50%;
-    margin: 5rem auto;
+.summaryContainer {
+  border: 1px solid #737272;
+  width: 50%;
+  margin: 5rem auto;
+}
+.yourvote {
+  border: 3px solid green;
+}
+.yourvote::before {
+  font-weight: bold;
+  color: green;
+  content: "";
+  background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBP_dG67msocHwfbpxO9NFspmmHhPRJ8esB5YB_SUvlRYYbc3WHWIeMzGBM5ddPlXPjak&usqp=CAU");
+  background-size: cover;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin-left: -25%;
 }

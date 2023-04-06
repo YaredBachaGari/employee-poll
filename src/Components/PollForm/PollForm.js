@@ -40,7 +40,6 @@ const PollForm = () => {
       optionTwo: "",
       sucess: true,
     });
-    navigate("/home");
   };
   return (
     <div className="pollform-container">

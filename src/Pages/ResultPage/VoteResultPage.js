@@ -3,52 +3,50 @@ import Navbar from "../../Components/NavBar/Navbar";
 import VoteResult from "../../Components/VoteResult/VoteResult";
 import "./VoteResultPage.css";
 import { useParams } from "react-router-dom";
-//import { useSelector } from "react-redux";
 import NotFound from "../../Components/NotFound/NotFound";
 import HOC from "../../Components/HigherOrderComp/HOC";
 
 const VoteResultPage = ({ allUsers, AuthUser, Questions }) => {
-  // const { questions, authUser, users } = useSelector((state) => ({
-  //   questions: state.Questions,
-  //   authUser: state.AuthUser,
-  //   users: state.Users,
-  // }));
   const [result, setResult] = useState({
     text: "",
     votersNo: "",
     percentage: "",
   });
   const qid = useParams()?.questionId;
-  const optionOne = Questions?.data[qid]?.optionOne;
-  const optionTwo = Questions.data[qid]?.optionTwo;
+  const data = Questions?.data[qid]
+  const optionOne = data?.optionOne;
+  const optionTwo = data?.optionTwo;
   const authuser = AuthUser?.loggedInUser?.username;
   const NoOfallUsers = Object.keys(allUsers.data).length;
 
   const loadVoteSummary = () => {
     const optionOnevoters = optionOne?.votes.length;
     const optionTwovoters = optionTwo?.votes.length;
-    let displayText = "";
-    let percentageVote = "";
-    let percentageTotal = "";
+    const totalVote = optionOnevoters + optionTwovoters;
+    let UserChoice = "";
     if (optionOnevoters || optionTwovoters) {
       if (optionOne.votes.includes(authuser)) {
-        displayText = optionOne.text;
-        percentageVote =
-          (optionOnevoters / (optionOnevoters + optionTwovoters)) * 100;
-        percentageTotal = (optionOnevoters / NoOfallUsers) * 100;
+        UserChoice = "optionOne";
       } else {
-        displayText = optionTwo.text;
-        percentageVote =
-          (optionTwovoters / (optionOnevoters + optionTwovoters)) * 100;
-        percentageTotal = (optionTwovoters / NoOfallUsers) * 100;
+        UserChoice = "optionTwo";
       }
     }
-
     setResult({
-      text: displayText,
-      votersNo: optionOnevoters + optionTwovoters,
-      percentageSofar: percentageVote,
-      percentageTotal: percentageTotal,
+      textOptions: { one: optionOne?.text, two: optionTwo?.text },
+      loggedInUserChoice: UserChoice,
+      votersNo: {
+        optionOne: optionOnevoters,
+        optionTwo: optionTwovoters,
+        total: totalVote,
+      },
+      percentageSofar: {
+        optionOne: (optionOnevoters / totalVote) * 100,
+        optionTwo: (optionTwovoters / totalVote) * 100,
+      },
+      percentageTotal: {
+        optionOne: (optionOnevoters / NoOfallUsers) * 100,
+        optionTwo: (optionTwovoters / NoOfallUsers) * 100,
+      },
     });
   };
   useEffect(() => {
@@ -59,7 +57,7 @@ const VoteResultPage = ({ allUsers, AuthUser, Questions }) => {
     <div>
       <Navbar />
       <div className="voteresult-summary">
-        {result.text && result.percentageTotal ? (
+        {data ? (
           <VoteResult result={result} />
         ) : (
           <NotFound />
