@@ -8,6 +8,7 @@ import NewPollPage from "./Pages/NewPollPage/NewPollPage";
 import VoteResultPage from "./Pages/ResultPage/VoteResultPage";
 import HOC from "./Components/HigherOrderComp/HOC";
 import { useSelector } from "react-redux";
+import NotFound from "./Components/NotFound/NotFound";
 
 function App() {
   const { loggedInUser } = useSelector((state) => state.AuthUser);
@@ -25,7 +26,13 @@ function App() {
         ) : (
           <Route path="/" element={<LandingPage />} />
         )}
-        <Route path="/*" element={<Navigate to="/" />} />
+        {/* <Route path="/*" element={<Navigate to="/" />} /> */}
+        <Route path="*" element={<NotFound />} />
+        <Route path="/home" element={<Navigate to="/" />} />
+        <Route path="/questions/:questionId" element={<Navigate to="/" />} />
+        <Route path="/result/:questionId" element={<Navigate to="/" />} />
+        <Route path="/leaderboard" element={<Navigate to="/" />} />
+        <Route path="/add" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   );

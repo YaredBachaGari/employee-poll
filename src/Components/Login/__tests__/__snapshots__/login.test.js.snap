@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render avatar the snapshoots must match the login form and all fields should exist 1`] = `undefined`;

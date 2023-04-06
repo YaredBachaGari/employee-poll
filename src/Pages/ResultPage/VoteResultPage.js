@@ -3,25 +3,26 @@ import Navbar from "../../Components/NavBar/Navbar";
 import VoteResult from "../../Components/VoteResult/VoteResult";
 import "./VoteResultPage.css";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 import NotFound from "../../Components/NotFound/NotFound";
+import HOC from "../../Components/HigherOrderComp/HOC";
 
-const VoteResultPage = () => {
-  const { questions, authUser, users } = useSelector((state) => ({
-    questions: state.Questions,
-    authUser: state.AuthUser,
-    users: state.Users,
-  }));
+const VoteResultPage = ({ allUsers, AuthUser, Questions }) => {
+  // const { questions, authUser, users } = useSelector((state) => ({
+  //   questions: state.Questions,
+  //   authUser: state.AuthUser,
+  //   users: state.Users,
+  // }));
   const [result, setResult] = useState({
     text: "",
     votersNo: "",
     percentage: "",
   });
   const qid = useParams()?.questionId;
-  const optionOne = questions?.data[qid]?.optionOne;
-  const optionTwo = questions.data[qid]?.optionTwo;
-  const authuser = authUser.loggedInUser.username;
-  const NoOfallUsers = Object.keys(users.data).length;
+  const optionOne = Questions?.data[qid]?.optionOne;
+  const optionTwo = Questions.data[qid]?.optionTwo;
+  const authuser = AuthUser?.loggedInUser?.username;
+  const NoOfallUsers = Object.keys(allUsers.data).length;
 
   const loadVoteSummary = () => {
     const optionOnevoters = optionOne?.votes.length;
@@ -52,7 +53,7 @@ const VoteResultPage = () => {
   };
   useEffect(() => {
     loadVoteSummary();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div>
@@ -68,4 +69,4 @@ const VoteResultPage = () => {
   );
 };
 
-export default VoteResultPage;
+export default HOC(VoteResultPage);

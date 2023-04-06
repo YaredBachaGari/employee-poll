@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "./PollForm.css";
 import { handleQuestionPost } from "../../Redux-handler/Actions/Questions";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const PollForm = () => {
   const dispatch = useDispatch();
-  const {loggedInUser} = useSelector(state=>state.AuthUser)
+  const navigate = useNavigate();
+  const { loggedInUser } = useSelector((state) => state.AuthUser);
   const [optionsText, seOptionsText] = useState({
     optionOne: "",
     optionTwo: "",
@@ -38,18 +40,14 @@ const PollForm = () => {
       optionTwo: "",
       sucess: true,
     });
-    setTimeout(() => {
-      seOptionsText({
-        optionOne: "",
-        optionTwo: "",
-        sucess: false,
-      });
-    }, 2500);
+    navigate("/home");
   };
   return (
     <div className="pollform-container">
       {optionsText.sucess && (
-        <p className="successMsg">you have successfully created a poll!! </p>
+        <p className="successMsg" data-testid="successmg">
+          you have successfully created a poll!!
+        </p>
       )}
       <div>
         <p className="formheading">Would You Rather</p>
@@ -61,6 +59,7 @@ const PollForm = () => {
         <input
           id="firstoption"
           name="optionOne"
+          data-testid="optionOne"
           value={optionsText.optionOne}
           placeholder="Option one"
           onChange={onChangeHandler}
@@ -71,6 +70,7 @@ const PollForm = () => {
         <input
           id="secondoption"
           name="optionTwo"
+          data-testid="optionTwo"
           value={optionsText.optionTwo}
           placeholder="Option two"
           onChange={onChangeHandler}
@@ -80,6 +80,7 @@ const PollForm = () => {
         <button
           className="btn"
           onClick={onSubmit}
+          data-testid="createPoll"
           disabled={
             optionsText.optionOne && optionsText.optionTwo ? false : true
           }

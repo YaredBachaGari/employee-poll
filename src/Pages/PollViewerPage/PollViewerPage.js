@@ -16,7 +16,7 @@ const PollViewerPage = ({ Questions, allUsers, AuthUser }) => {
   const authedUser = AuthUser?.loggedInUser?.username;
   return (
     <>
-      <Navbar />
+      <Navbar AuthUser={AuthUser}/>
       {author ? (
         <div className="poll-option-section">
           <PollViewer

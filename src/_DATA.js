@@ -1,4 +1,4 @@
-let users = {
+export let users = {
   sarahedo: {
     id: "sarahedo",
     password: "password123",
@@ -51,7 +51,7 @@ let users = {
   },
 };
 
-let questions = {
+export let questions = {
   "8xf0y6ziyjabvozdd253nd": {
     id: "8xf0y6ziyjabvozdd253nd",
     author: "sarahedo",
@@ -184,7 +184,6 @@ export function _saveQuestion(question) {
         [formattedQuestion.id]: formattedQuestion,
       };
 
-      console.log(formattedQuestion)
 
       resolve(formattedQuestion);
     }, 1000);
@@ -192,7 +191,6 @@ export function _saveQuestion(question) {
 }
 
 export function _saveQuestionAnswer({ authedUser, qid, answer }) {
-  //username, questionId, optionOne/optionTwo
   return new Promise((resolve, reject) => {
     if (!authedUser || !qid || !answer) {
       reject("Please provide authedUser, qid, and answer");

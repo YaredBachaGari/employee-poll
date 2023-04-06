@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./login.css";
+import "./loginStyle.css";
 import { useNavigate } from "react-router-dom";
 import { AuthenticateUserSuccess } from "../../Redux-handler/Actions/AuthUser";
 import { useDispatch } from "react-redux";
@@ -9,7 +9,7 @@ const Login = ({ UserData, Auth }) => {
   const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
-  const { data } = UserData;
+  const data = UserData?.data;
   const onchangeHandler = (e) => {
     e.preventDefault();
     const name = e.target.name;
@@ -62,6 +62,7 @@ const Login = ({ UserData, Auth }) => {
           name="username"
           placeholder="username"
           onChange={onchangeHandler}
+          data-testid="username"
         />
       </div>
       <div className="input-container">
@@ -73,10 +74,11 @@ const Login = ({ UserData, Auth }) => {
           name="password"
           placeholder="Password"
           onChange={onchangeHandler}
+          data-testid="password"
         />
       </div>
       <div className="login-btn">
-        <button className="btn" onClick={submitHandler}>
+        <button data-testid="loginbtn" className="btn" onClick={submitHandler}>
           Submit
         </button>
       </div>

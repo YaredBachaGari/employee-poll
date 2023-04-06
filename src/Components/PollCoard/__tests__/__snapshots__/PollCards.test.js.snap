@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PollCard Component should render username, date and show button 1`] = `undefined`;

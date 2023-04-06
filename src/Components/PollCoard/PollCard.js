@@ -4,7 +4,9 @@ import { formatDate, formatTime } from "../../utils/helper";
 import { useNavigate } from "react-router-dom";
 
 const PollCard = ({ survey, category }) => {
-  const { id, author, timestamp } = survey;
+  const id = survey?.id;
+  const author = survey?.author;
+  const timestamp = survey?.timestamp;
   const SurveyDate = formatDate(timestamp);
   const SurveyTime = formatTime(timestamp);
   const navigate = useNavigate();
@@ -28,9 +30,9 @@ const PollCard = ({ survey, category }) => {
   return (
     <div className="card-container">
       <div className="card-text">
-        <p className="username">{author}</p>
+        <p className="username" data-testid="author">{author}</p>
         <p className="polldate">
-          <span>{SurveyTime}</span> | <span>{SurveyDate}</span>
+          <span data-testid="time">{SurveyTime}</span> | <span>{SurveyDate}</span>
         </p>
       </div>
       <button onClick={handleClick}>Show</button>

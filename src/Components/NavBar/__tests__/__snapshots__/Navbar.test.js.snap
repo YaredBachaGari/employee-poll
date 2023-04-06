@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar component it should match the snapshots with prop being passed 1`] = `undefined`;
+
+exports[`Navbar component it should match the snapshots without any prop 1`] = `undefined`;

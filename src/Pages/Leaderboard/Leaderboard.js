@@ -7,7 +7,7 @@ import HOC from "../../Components/HigherOrderComp/HOC";
 const Leaderboard = ({allUsers, AuthUser, Questions}) => {
   return (
     <div className="">
-      <Navbar />
+      <Navbar AuthUser={AuthUser}/>
       <div className="leadboardSummary">
         <SummaryTable allUsers={allUsers}/>
       </div>

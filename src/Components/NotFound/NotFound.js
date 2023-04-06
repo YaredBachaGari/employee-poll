@@ -1,14 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import './NotFound.css'
+import "./NotFound.css";
+import HOC from "../HigherOrderComp/HOC";
 
-const NotFound = () => {
+const NotFound = ({ AuthUser }) => {
+  const { loggedInUser } = AuthUser;
   return (
     <div className="notfound">
       <h1>404 | Page Not Found</h1>
-      <Link to="/home">Back to home</Link>
+      {loggedInUser?.id ? (
+        <Link to="/home" data-testid="gohome">Back to home</Link>
+      ) : (
+        <Link to="/" data-testid="signIn">Sign In</Link>
+      )}
     </div>
   );
 };
 
-export default NotFound;
+export default HOC(NotFound);

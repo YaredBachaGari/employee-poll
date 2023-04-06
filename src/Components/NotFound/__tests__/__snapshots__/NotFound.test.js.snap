@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFound Component for loggedin users signin button should hide and go back btn shoud render 1`] = `undefined`;
+
+exports[`NotFound Component for non-loggedin users signin button should render and go back btn shoud hide 1`] = `undefined`;

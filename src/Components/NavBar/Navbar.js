@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Avatar from "../Avatar/Avatar";
 import "./Navbar.css";
-import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../Redux-handler/Actions/AuthUser";
@@ -10,7 +9,8 @@ import { logoutUser } from "../../Redux-handler/Actions/AuthUser";
 const Navbar = ({ AuthUser }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { username, avatarURL } = AuthUser.loggedInUser;
+  const username = AuthUser?.loggedInUser?.username;
+  const avatarURL = AuthUser?.loggedInUser?.avatarURL;
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -19,22 +19,23 @@ const Navbar = ({ AuthUser }) => {
   return (
     <div className="nav-container">
       <div className="nav-menu">
-        <Link to="/home" className="link">
+        <Link to="/home" className="link" data-testid="home">
           Home
         </Link>
-        <Link to="/leaderboard" className="link">
+        <Link to="/leaderboard" className="link" data-testid="leaderBoard">
           LeaderBoard
         </Link>
-        <Link to="/add" className="link">
+        <Link to="/add" className="link" data-testid="newpoll">
           New
         </Link>
       </div>
       <div className="avatar-logout">
         <div className="avatar-username profileAvatar">
           <Avatar AvatarUrl={avatarURL} />
-          <span>{username}</span>
+          <span data-testid="username">{username}</span>
         </div>
         <button
+          data-testid="logout"
           onClick={() => {
             handleLogout();
           }}
@@ -45,10 +46,5 @@ const Navbar = ({ AuthUser }) => {
     </div>
   );
 };
-const mapStateToProps = (state) => {
-  return {
-    AuthUser: state.AuthUser,
-  };
-};
 
-export default connect(mapStateToProps)(Navbar);
+export default Navbar;

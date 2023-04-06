@@ -1,14 +1,14 @@
 import React from "react";
 import Navbar from "../../Components/NavBar/Navbar";
 import PollForm from "../../Components/PollForm/PollForm";
-
-const NewPollPage = () => {
+import HOC from "../../Components/HigherOrderComp/HOC";
+const NewPollPage = ({ AuthUser }) => {
   return (
     <div>
-      <Navbar />
+      <Navbar AuthUser={AuthUser} />
       <PollForm />
     </div>
   );
 };
 
-export default NewPollPage;
+export default HOC(NewPollPage);
