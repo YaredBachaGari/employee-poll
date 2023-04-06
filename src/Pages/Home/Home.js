@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Navbar from "../../Components/NavBar/Navbar";
 import PollCointainer from "../../Components/PollCointainer/PollCointainer";
 import "./Home.css";

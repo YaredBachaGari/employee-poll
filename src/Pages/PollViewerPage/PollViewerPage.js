@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import HOC from "../../Components/HigherOrderComp/HOC";
 import NotFound from "../../Components/NotFound/NotFound";
 import VoteResult from "../../Components/VoteResult/VoteResult";
+
 const PollViewerPage = ({ Questions, allUsers, AuthUser }) => {
   const [result, setResult] = useState({});
   const [isVoted, setIsVoted] = useState(false);
@@ -58,6 +59,7 @@ const PollViewerPage = ({ Questions, allUsers, AuthUser }) => {
   };
   useEffect(() => {
     loadVoteSummary();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>

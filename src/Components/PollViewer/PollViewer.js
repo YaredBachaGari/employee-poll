@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import Avatar from "../Avatar/Avatar";
 import "./PollViewer.css";
 import { handlePostingAnswer } from "../../Redux-handler/Actions/Answer";

@@ -6,7 +6,7 @@ const mockData = {
   author: "sara",
 };
 
-describe("Save questions function ", () => {
+describe("Save questions function", () => {
     it('should return a new question object on successful save', async () => {
     const result = await _saveQuestion(mockData);
     expect(result).toBeDefined();
