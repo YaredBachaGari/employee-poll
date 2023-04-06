@@ -1,4 +1,4 @@
-import { _saveQuestion } from "../_DATA";
+import { _saveQuestion } from "../../_DATA";
 
 const mockData = {
   optionOneText: "give",
