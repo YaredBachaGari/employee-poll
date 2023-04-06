@@ -1,15 +1,18 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Avatar from "../Avatar/Avatar";
 import "./PollViewer.css";
 import { handlePostingAnswer } from "../../Redux-handler/Actions/Answer";
 import { useDispatch } from "react-redux";
 
-const PollViewer = ({ author, optionOne, optionTwo,avatar,authedUser, qid }) => {
+const PollViewer = ({ pollData, setIsVoted }) => {
+
   const dispatch = useDispatch();
   const optionA = useRef();
   const optionB = useRef();
   const ButtonA = useRef(0);
   const ButtonB = useRef(0);
+  const authedUser = pollData?.authedUser;
+  const qid = pollData?.qid;
   const onSelectHandler = (buttonId) => {
     if (buttonId === "button1") {
       const answer = "optionOne";
@@ -29,20 +32,21 @@ const PollViewer = ({ author, optionOne, optionTwo,avatar,authedUser, qid }) => 
       ButtonA.current.style.backgroundColor = "#cccccc";
       ButtonA.current.style.color = "#666666";
     }
+    setIsVoted(true);
   };
 
   return (
     <div>
       <div>
-        <p className="question-heading">{`Poll By ${author}`}</p>
+        <p className="question-heading">{`Poll By ${pollData?.author}`}</p>
         <div className="profileAvatar2">
-          <Avatar className="pollviewer-avatar" AvatarUrl={avatar} />
+          <Avatar className="pollviewer-avatar" AvatarUrl={pollData?.avatar} />
         </div>
       </div>
       <p className="question-heading">Would You Rather</p>
       <div className="choices">
         <div ref={optionA} className="option">
-          <p>{optionOne?.text}</p>
+          <p>{pollData?.optionOne?.text}</p>
           <button
             ref={ButtonA}
             data-id="button1"
@@ -52,7 +56,7 @@ const PollViewer = ({ author, optionOne, optionTwo,avatar,authedUser, qid }) => 
           </button>
         </div>
         <div ref={optionB} className="option">
-          <p>{optionTwo?.text}</p>
+          <p>{pollData?.optionTwo?.text}</p>
           <button
             ref={ButtonB}
             data-id="button2"
