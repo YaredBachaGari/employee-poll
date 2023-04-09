@@ -6,41 +6,35 @@ import { useParams } from "react-router-dom";
 import HOC from "../../Components/HigherOrderComp/HOC";
 import NotFound from "../../Components/NotFound/NotFound";
 import VoteResult from "../../Components/VoteResult/VoteResult";
+import { useSelector } from "react-redux";
+import { selectedInfo,filterData } from "../../utils/helper";
 
-const PollViewerPage = ({ Questions, allUsers, AuthUser }) => {
+const PollViewerPage = ({allUsers,AuthUser, Questions}) => {
+  const answer = useSelector((state) => state.Answers);
   const [result, setResult] = useState({});
-  const [isVoted, setIsVoted] = useState(false);
   const qid = useParams()?.questionId;
-  const data = Questions?.data[qid];
-  const author = data?.author;
-  const optionOne = data?.optionOne;
-  const optionTwo = data?.optionTwo;
-  const avatar = allUsers?.data[author]?.avatarURL;
   const authuser = AuthUser?.loggedInUser?.username;
-  const NoOfallUsers = Object.keys(allUsers.data).length;
-  const pollData = {
-    qid,
-    author,
-    avatar,
-    authedUser: authuser,
-    optionOne,
-    optionTwo,
-  };
 
   const loadVoteSummary = () => {
-    const optionOnevoters = optionOne?.votes.length;
-    const optionTwovoters = optionTwo?.votes.length;
+    filterData(Questions, AuthUser);
+    const selected = selectedInfo(qid, Questions, allUsers, AuthUser);
+    const optionOnevoters = selected?.optionOne?.votes.length;
+    const optionTwovoters = selected?.optionTwo?.votes.length;
     const totalVote = optionOnevoters + optionTwovoters;
     let UserChoice = "";
     if (optionOnevoters || optionTwovoters) {
-      if (optionOne.votes.includes(authuser)) {
+      if (selected?.optionOne.votes.includes(authuser)) {
         UserChoice = "optionOne";
       } else {
         UserChoice = "optionTwo";
       }
     }
     setResult({
-      textOptions: { one: optionOne?.text, two: optionTwo?.text },
+      id: selected.id,
+      textOptions: {
+        one: selected?.optionOne?.text,
+        two: selected?.optionTwo?.text,
+      },
       loggedInUserChoice: UserChoice,
       votersNo: {
         optionOne: optionOnevoters,
@@ -52,28 +46,30 @@ const PollViewerPage = ({ Questions, allUsers, AuthUser }) => {
         optionTwo: (optionTwovoters / totalVote) * 100,
       },
       percentageTotal: {
-        optionOne: (optionOnevoters / NoOfallUsers) * 100,
-        optionTwo: (optionTwovoters / NoOfallUsers) * 100,
+        optionOne: (optionOnevoters / selected?.NoOfallUsers) * 100,
+        optionTwo: (optionTwovoters / selected?.NoOfallUsers) * 100,
       },
+      pollData: selected?.pollData,
     });
   };
   useEffect(() => {
     loadVoteSummary();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [Questions, answer]);
+
   return (
     <>
       <Navbar AuthUser={AuthUser} />
-      {author ? (
+      {result?.pollData?.author ? (
         <div className="poll-option-section">
-          <PollViewer pollData={pollData} setIsVoted={setIsVoted} />
+          <PollViewer pollData={result?.pollData} answered={result?.id} />
         </div>
       ) : (
         <div className="notfoundmsg">
           <NotFound />
         </div>
       )}
-      {isVoted && (
+      {(result?.id || result?.id === answer?.option) && ( //display result issue
         <div className="voteresult-summary">
           <VoteResult result={result} />
         </div>

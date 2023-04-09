@@ -22,14 +22,13 @@ export const FetchAllUsersFailed = (error) => {
 };
 
 export const handleUserFetch = () => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(FetchAllUsersrequest());
-    return _getUsers()
-      .then((resp) => {
-        dispatch(FetchAllUsersSuccessfully(resp));
-      })
-      .catch((error) => {
-        dispatch(FetchAllUsersFailed(error.message));
-      });
+    try {
+      const resp = await _getUsers();
+      dispatch(FetchAllUsersSuccessfully(resp));
+    } catch (error) {
+      dispatch(FetchAllUsersFailed(error.message));
+    }
   };
 };

@@ -3,6 +3,7 @@ import {
   Fetch_user_success,
   Fetch_user_failed,
 } from "../Actions/Users";
+import { logout_user } from "../Actions/AuthUser";
 
 const initialState = {
   loading: false,
@@ -30,6 +31,8 @@ const UsersReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
+    case logout_user:
+      return initialState;
     default:
       return state;
   }

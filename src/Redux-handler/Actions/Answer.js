@@ -8,10 +8,12 @@ export const saveAnswerToQuestionReq = () => {
     type: saveAnswer_Request,
   };
 };
-export const saveAnswerToQuestionSuccess = (answer) => {
+export const saveAnswerToQuestionSuccess = (answer, id, option) => {
   return {
     type: saveAnswer_success,
-    answer,
+    answer: answer,
+    id: id,
+    option: option,
   };
 };
 export const saveAnswerToQuestionFailed = (error) => {
@@ -21,14 +23,14 @@ export const saveAnswerToQuestionFailed = (error) => {
   };
 };
 
-export const handlePostingAnswer = (data) => {
+export const handlePostingAnswer = (data, id, option) => {
   return async (dispatch) => {
     dispatch(saveAnswerToQuestionReq());
     try {
-          const resp = await _saveQuestionAnswer(data);
-          dispatch(saveAnswerToQuestionSuccess(resp));
-      } catch (error) {
-          dispatch(saveAnswerToQuestionFailed(error.message));
-      }
+      const resp = await _saveQuestionAnswer(data);
+      dispatch(saveAnswerToQuestionSuccess(resp, id, option));
+    } catch (error) {
+      dispatch(saveAnswerToQuestionFailed(error.message));
+    }
   };
 };

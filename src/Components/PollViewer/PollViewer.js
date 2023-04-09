@@ -1,11 +1,16 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Avatar from "../Avatar/Avatar";
 import "./PollViewer.css";
 import { handlePostingAnswer } from "../../Redux-handler/Actions/Answer";
 import { useDispatch } from "react-redux";
+import { styleButtons } from "../../utils/helper";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const PollViewer = ({ pollData, setIsVoted }) => {
-
+const PollViewer = ({ pollData, answered }) => {
+  const isVoted = useSelector((state) => state.Answers);
+  const navigate = useNavigate();
+  console.log(isVoted);
   const dispatch = useDispatch();
   const optionA = useRef();
   const optionB = useRef();
@@ -13,27 +18,29 @@ const PollViewer = ({ pollData, setIsVoted }) => {
   const ButtonB = useRef(0);
   const authedUser = pollData?.authedUser;
   const qid = pollData?.qid;
-  const onSelectHandler = (buttonId) => {
-    if (buttonId === "button1") {
-      const answer = "optionOne";
-      dispatch(handlePostingAnswer({ authedUser, qid, answer }));
-      optionA.current.style.border = "1px solid green";
-      ButtonA.current.style.backgroundColor = "green";
-      ButtonB.current.setAttribute("disabled", true);
-      ButtonB.current.style.backgroundColor = "#cccccc";
-      ButtonB.current.style.color = "#666666";
+  const onSelectHandler = (option) => {
+    if (option === "optionOne") {
+      dispatch(
+        handlePostingAnswer({ authedUser, qid, answer: option }, qid, option)
+      );
+      styleButtons(option, optionA, optionB, ButtonA, ButtonB);
+      navigate("/home");
+      navigate(`/questions/${qid}`);
     }
-    if (buttonId === "button2") {
-      const answer = "optionTwo";
-      dispatch(handlePostingAnswer({ authedUser, qid, answer }));
-      optionB.current.style.border = "1px solid green";
-      ButtonB.current.style.backgroundColor = "green";
-      ButtonA.current.setAttribute("disabled", true);
-      ButtonA.current.style.backgroundColor = "#cccccc";
-      ButtonA.current.style.color = "#666666";
+    if (option === "optionTwo") {
+      dispatch(
+        handlePostingAnswer({ authedUser, qid, answer: option }, qid, option)
+      );
+      styleButtons(option, optionA, optionB, ButtonA, ButtonB);
+      navigate("/home");
+      navigate(`/questions/${qid}`);
     }
-    setIsVoted(true);
   };
+  useEffect(() => {
+    if (answered) {
+      styleButtons(answered, optionA, optionB, ButtonA, ButtonB);
+    }
+  }, [answered]);
 
   return (
     <div>
@@ -50,7 +57,7 @@ const PollViewer = ({ pollData, setIsVoted }) => {
           <button
             ref={ButtonA}
             data-id="button1"
-            onClick={(e) => onSelectHandler(e.target.dataset.id)}
+            onClick={(e) => onSelectHandler("optionOne")}
           >
             Click
           </button>
@@ -60,7 +67,7 @@ const PollViewer = ({ pollData, setIsVoted }) => {
           <button
             ref={ButtonB}
             data-id="button2"
-            onClick={(e) => onSelectHandler(e.target.dataset.id)}
+            onClick={(e) => onSelectHandler("optionTwo")}
           >
             Click
           </button>

@@ -5,33 +5,24 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import "@testing-library/jest-dom";
 import configureStore from "redux-mock-store";
-import { useDispatch } from "react-redux";
-
-jest.mock("react-redux", () => ({
-  ...jest.requireActual("react-redux"),
-  useDispatch: jest.fn(),
-}));
-
-jest.mock("../../../Redux-handler/Actions/Users");
-jest.mock("../../../Redux-handler/Actions/Questions");
 
 describe("PollForm Component", () => {
-  const mockDispatch = jest.fn();
+  const mockStore = configureStore();
+  let store;
 
   beforeEach(() => {
-    useDispatch.mockReturnValue(mockDispatch);
+    store = mockStore({
+      AuthUser: {
+        loggedInUser: { id: 1, username: "john" },
+      },
+    });
+    store.dispatch = jest.fn();
   });
 
   afterEach(() => {
     jest.resetAllMocks();
   });
   it("should render the form", () => {
-    const mockStore = configureStore();
-    const store = mockStore({
-      AuthUser: {
-        loggedInUser: { id: 1, username: "john" },
-      },
-    });
     const { Form } = render(
       <Provider store={store}>
         <BrowserRouter>
@@ -44,32 +35,28 @@ describe("PollForm Component", () => {
     expect(screen.getByTestId("optionOne")).toBeInTheDocument();
     expect(screen.getByTestId("optionTwo")).toBeInTheDocument();
   });
-  it("on submit of the poll success msg should display", async () => {
-    const mockStore = configureStore();
-    const store = mockStore({
-      AuthUser: {
-        loggedInUser: { id: 1, username: "john" },
-      },
-    });
-    const { Form } = render(
+  it("displays success message after submitting form", async () => {
+    render(
       <Provider store={store}>
         <BrowserRouter>
           <PollForm />
         </BrowserRouter>
       </Provider>
     );
-    fireEvent.input(screen.getByTestId("optionOne"), {
-      target: { value: "learn java" },
-    });
-    fireEvent.input(screen.getByTestId("optionOne"), {
-      target: { value: "learn c#" },
-    });
-    fireEvent.click(screen.getByTestId("createPoll"));
-    await waitFor(() => new Promise((resolve) => setTimeout(resolve, 4000)), {
-      timeout: 5000,
-    });
-    await expect(
-      screen.queryByText(/you have successfully created a poll!!/i)
-    ).not.toBeInTheDocument();
+
+    const optionOneInput = screen.getByTestId("optionOne");
+    const optionTwoInput = screen.getByTestId("optionTwo");
+    const submitButton = screen.getByTestId("createPoll");
+
+    fireEvent.change(optionOneInput, { target: { value: "Option one" } });
+    fireEvent.change(optionTwoInput, { target: { value: "Option two" } });
+    fireEvent.click(submitButton);
+
+    const successMsg = await screen.findByTestId("successmg");
+
+    expect(successMsg).toBeInTheDocument();
+    expect(successMsg).toHaveTextContent(
+      /you have successfully created a poll!!/i
+    );
   });
 });

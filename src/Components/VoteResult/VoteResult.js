@@ -1,9 +1,13 @@
 import "./VoteResult.css";
 const VoteResult = ({ result }) => {
-  const UserChoice = result?.loggedInUserChoice
+  const UserChoice = result?.loggedInUserChoice;
   return (
     <div>
-      <div className={`summaryContainer ${UserChoice==="optionOne" && 'yourvote'}`}>
+      <div
+        className={`summaryContainer ${
+          UserChoice === "optionOne" && "yourvote"
+        }`}
+      >
         <p>{result?.textOptions?.one}</p>
         <p>
           No of people voted this option:{" "}
@@ -18,7 +22,11 @@ const VoteResult = ({ result }) => {
           <span>{`${result?.percentageTotal?.optionOne} %`}</span>
         </p>
       </div>
-      <div className={`summaryContainer ${UserChoice==="optionTwo" && 'yourvote'}`}>
+      <div
+        className={`summaryContainer ${
+          UserChoice === "optionTwo" && "yourvote"
+        }`}
+      >
         <p>{result?.textOptions?.two}</p>
         <p>
           No of people voted this option:{" "}

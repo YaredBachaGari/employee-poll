@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "./loginStyle.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { AuthenticateUserSuccess } from "../../Redux-handler/Actions/AuthUser";
 import { useDispatch } from "react-redux";
 
 const Login = ({ UserData, Auth }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const redirectPath = localStorage.getItem("redirectPath");
   const [userInfo, setUserInfo] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const data = UserData?.data;
@@ -34,7 +35,15 @@ const Login = ({ UserData, Auth }) => {
         ) {
           const { id, name, avatarURL } = data[key];
           user = { id, username: key, name, avatarURL };
-          navigate("/home");
+          ///navigate("/home");
+          if (redirectPath) {
+            //localStorage.removeItem("redirectPath");
+             //<Navigate to={redirectPath} replace />;
+             navigate(redirectPath)
+          } else {
+            navigate('/home')
+             //<Navigate to="/home" replace />;
+          }
           setUserInfo({ username: "", password: "" });
           foundUser = true;
           break;

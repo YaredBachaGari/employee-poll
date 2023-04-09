@@ -8,18 +8,20 @@ const HOC = (Component) => {
     const allUsers = useSelector((state) => state.Users);
     const AuthUser = useSelector((state) => state.AuthUser);
     const Questions = useSelector((state) => state.Questions);
+    const answer = useSelector((state) => state.Answers);
     const dispatch = useDispatch();
 
     useEffect(() => {
       dispatch(handleUserFetch());
       dispatch(handlequestionFetching());
-    }, [dispatch]);
+    }, [dispatch, answer]);
 
     return (
       <Component
         allUsers={allUsers}
         AuthUser={AuthUser}
         Questions={Questions}
+        answer={answer}
       />
     );
   };

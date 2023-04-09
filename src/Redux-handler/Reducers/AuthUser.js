@@ -27,12 +27,7 @@ const AuthUserReducer = (state = initialState, action) => {
         error: "UnAuthorized User",
       };
     case logout_user:
-      return {
-        ...state,
-        checking: false,
-        loggedInUser: {},
-        error: "",
-      };
+      return initialState;
     default:
       return state;
   }
