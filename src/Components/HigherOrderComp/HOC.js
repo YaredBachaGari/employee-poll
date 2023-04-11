@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { handleUserFetch } from "../../Redux-handler/Actions/Users";
 import { handlequestionFetching } from "../../Redux-handler/Actions/Questions";
@@ -10,11 +10,20 @@ const HOC = (Component) => {
     const Questions = useSelector((state) => state.Questions);
     const answer = useSelector((state) => state.Answers);
     const dispatch = useDispatch();
+    const [isInitialized, setIsInitialized] = useState(false);
 
     useEffect(() => {
-      dispatch(handleUserFetch());
-      dispatch(handlequestionFetching());
-    }, [dispatch, answer]);
+      if (
+        !AuthUser.loggedInUser ||
+        !allUsers ||
+        Object.keys(allUsers.data).length === 0 ||
+        !Questions ||
+        Object.keys(Questions.data).length === 0
+      ) {
+        dispatch(handleUserFetch());
+        dispatch(handlequestionFetching());
+      }
+    }, []);
 
     return (
       <Component

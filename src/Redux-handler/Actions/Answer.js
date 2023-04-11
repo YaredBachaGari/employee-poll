@@ -8,12 +8,13 @@ export const saveAnswerToQuestionReq = () => {
     type: saveAnswer_Request,
   };
 };
-export const saveAnswerToQuestionSuccess = (answer, id, option) => {
+export const saveAnswerToQuestionSuccess = (answer, id, option, authedUser) => {
   return {
     type: saveAnswer_success,
     answer: answer,
     id: id,
     option: option,
+    authedUser: authedUser,
   };
 };
 export const saveAnswerToQuestionFailed = (error) => {
@@ -23,12 +24,12 @@ export const saveAnswerToQuestionFailed = (error) => {
   };
 };
 
-export const handlePostingAnswer = (data, id, option) => {
+export const handlePostingAnswer = (data, id, option, authedUser) => {
   return async (dispatch) => {
     dispatch(saveAnswerToQuestionReq());
     try {
       const resp = await _saveQuestionAnswer(data);
-      dispatch(saveAnswerToQuestionSuccess(resp, id, option));
+      dispatch(saveAnswerToQuestionSuccess(resp, id, option, authedUser));
     } catch (error) {
       dispatch(saveAnswerToQuestionFailed(error.message));
     }

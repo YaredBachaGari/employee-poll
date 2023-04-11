@@ -20,20 +20,20 @@ const Home = ({ allUsers, AuthUser, Questions }) => {
   };
   return (
     <>
-      {Questions.loading || allUsers.loading ? (
+      {/* {Questions.loading || allUsers.loading ? (
         <p className="loadingmsg">Loading...</p>
-      ) : (
+      ) : ( */}
         <div>
           <Navbar AuthUser={AuthUser} />
           <div className="toggler">
             <button
-              className={isToggled?.new && "defaultToggle"}
+              className={isToggled?.new ? "defaultToggle" : ""}
               onClick={() => handleToggle("new")}
             >
               New Questions
             </button>
             <button
-              className={isToggled?.done && "defaultToggle"}
+              className={isToggled?.done ? "defaultToggle" : ""}
               onClick={() => handleToggle("done")}
             >
               Done
@@ -61,7 +61,7 @@ const Home = ({ allUsers, AuthUser, Questions }) => {
             </div>
           )}
         </div>
-      )}
+      {/* )} */}
     </>
   );
 };

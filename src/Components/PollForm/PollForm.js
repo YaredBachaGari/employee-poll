@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "./PollForm.css";
 import { handleQuestionPost } from "../../Redux-handler/Actions/Questions";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const PollForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loggedInUser } = useSelector((state) => state.AuthUser);
   const [optionsText, seOptionsText] = useState({
     optionOne: "",
@@ -38,6 +40,7 @@ const PollForm = () => {
       optionTwo: "",
       sucess: true,
     });
+    navigate("/home")
   };
   return (
     <div className="pollform-container">

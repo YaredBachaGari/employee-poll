@@ -45,9 +45,14 @@ Follow below steps:
    ```sh
    npm run test
    ```
-
+## Contributors 
+### Author
+Yared Gari 
+### Reviewers
+Udacity Instructors 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
 I would like to express my sincere gratitude to Udacity for their excellent education and support during my learning journey. I am grateful for the challenge presented by this project, which has helped me to develop new skills in react-redux. Additionally, I appreciate the provision of the starter code, fake API and project requirements, which have allowed me to put my learning into practice and build a functional app.
+
 

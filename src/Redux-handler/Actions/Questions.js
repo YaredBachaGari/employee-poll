@@ -37,7 +37,7 @@ export const QuestionPostSuccess = (NewQuestion) => {
 };
 export const QuestionPostFailed = (error) => {
   return {
-    type: QuestionPost_Success,
+    type: QuestionPost_Failed,
     error,
   };
 };

@@ -8,6 +8,7 @@ import NewPollPage from "./Pages/NewPollPage/NewPollPage";
 import HOC from "./Components/HigherOrderComp/HOC";
 import RequireAuth from "./Components/RequireAuth/RequireAuth";
 import NotFound from "./Components/NotFound/NotFound";
+import store from "./Redux-handler/Store/Store";
 
 function App() {
   return (

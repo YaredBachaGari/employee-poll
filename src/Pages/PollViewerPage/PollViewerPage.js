@@ -16,7 +16,7 @@ const PollViewerPage = ({allUsers,AuthUser, Questions}) => {
   const authuser = AuthUser?.loggedInUser?.username;
 
   const loadVoteSummary = () => {
-    filterData(Questions, AuthUser);
+    //filterData(Questions, AuthUser);
     const selected = selectedInfo(qid, Questions, allUsers, AuthUser);
     const optionOnevoters = selected?.optionOne?.votes.length;
     const optionTwovoters = selected?.optionTwo?.votes.length;
@@ -29,8 +29,9 @@ const PollViewerPage = ({allUsers,AuthUser, Questions}) => {
         UserChoice = "optionTwo";
       }
     }
+    const id = allUsers?.data[authuser]?.answers[qid];
     setResult({
-      id: selected.id,
+      id: id,
       textOptions: {
         one: selected?.optionOne?.text,
         two: selected?.optionTwo?.text,
@@ -55,7 +56,7 @@ const PollViewerPage = ({allUsers,AuthUser, Questions}) => {
   useEffect(() => {
     loadVoteSummary();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [Questions, answer]);
+  }, [Questions]);
 
   return (
     <>

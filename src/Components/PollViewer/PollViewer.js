@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 const PollViewer = ({ pollData, answered }) => {
   const isVoted = useSelector((state) => state.Answers);
   const navigate = useNavigate();
-  console.log(isVoted);
   const dispatch = useDispatch();
   const optionA = useRef();
   const optionB = useRef();
@@ -18,10 +17,16 @@ const PollViewer = ({ pollData, answered }) => {
   const ButtonB = useRef(0);
   const authedUser = pollData?.authedUser;
   const qid = pollData?.qid;
+  const id = qid;
   const onSelectHandler = (option) => {
     if (option === "optionOne") {
       dispatch(
-        handlePostingAnswer({ authedUser, qid, answer: option }, qid, option)
+        handlePostingAnswer(
+          { authedUser, qid, answer: option },
+          id,
+          option,
+          authedUser
+        )
       );
       styleButtons(option, optionA, optionB, ButtonA, ButtonB);
       navigate("/home");
@@ -29,7 +34,12 @@ const PollViewer = ({ pollData, answered }) => {
     }
     if (option === "optionTwo") {
       dispatch(
-        handlePostingAnswer({ authedUser, qid, answer: option }, qid, option)
+        handlePostingAnswer(
+          { authedUser, qid, answer: option },
+          id,
+          option,
+          authedUser
+        )
       );
       styleButtons(option, optionA, optionB, ButtonA, ButtonB);
       navigate("/home");

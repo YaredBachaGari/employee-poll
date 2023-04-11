@@ -25,7 +25,8 @@ export const logoutUser = () => ({
 
 export const handleLogout = () => {
   return (dispatch) => {
-    dispatch(logoutUser());
     localStorage.removeItem("redirectPath");
+    dispatch(logoutUser());
+    window.location.reload();
   };
 };
