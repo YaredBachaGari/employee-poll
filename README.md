@@ -47,7 +47,7 @@ Follow below steps:
    ```
 ## Contributors 
 ### Author
-Yared Gari 
+This project is done by Yared Gari as a partial fulfilment of Udacity's React Nano-degree program. 
 ### Reviewers
 Udacity Instructors 
 <!-- ACKNOWLEDGMENTS -->
